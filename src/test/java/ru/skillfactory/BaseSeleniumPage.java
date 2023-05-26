@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class BaseSeleniumPage {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     public BaseSeleniumPage(WebDriver driver) {
         this.driver = driver;

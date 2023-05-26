@@ -13,7 +13,6 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 public class SiteTests {
     private static WebDriver driver;
@@ -30,7 +29,7 @@ private BaseSeleniumPage baseSeleniumPage;
         driver.get("https://skillfactory.ru");
         baseSeleniumPage = new BaseSeleniumPage(driver);
         js = (JavascriptExecutor) driver;
-        vars = new HashMap<String, Object>();
+        vars = new HashMap<>();
     }
 
        @After
