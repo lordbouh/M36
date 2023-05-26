@@ -87,5 +87,15 @@ private BaseSeleniumPage baseSeleniumPage;
         baseSeleniumPage.ClickSubmit();
     }
 
+    @Test
+    public void subscribe_it_news(){
+        baseSeleniumPage.subscribe_news_it();
+            }
+
+    @Test
+    public void courses_for_business(){
+        baseSeleniumPage.company_learning();
+        Assert.assertEquals("Развивайте бизнес", baseSeleniumPage.check_company_learning());
+    }
 
 }
