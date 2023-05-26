@@ -1,32 +1,60 @@
 package ru.skillfactory;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
-import org.junit.Before;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.util.concurrent.TimeUnit;
+public class BaseSeleniumPage {
 
-abstract public class BaseSeleniumPage {
-    protected WebDriver driver;
+    private WebDriver driver;
 
-    @Before
-    public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        //System.setProperty("webdriver.chrome.driver", "/home/kidney/Soft/chromedriver/chromedriver");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        //driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-       // driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.get("https://skillfactory.ru");
+    public BaseSeleniumPage(WebDriver driver) {
+        this.driver = driver;
     }
-        @After
-    public void tearDown(){
-      driver.close();
-      driver.quit();
-        }
+
+    private static final String SUBSCRIPTION_NAME_FIELD = "//body[1]/div[2]/div[34]/div[1]/div[1]/div[4]/div[1]/form[1]/div[2]/div[1]/div[1]/input[1]";
+    private static final String SUBSCRIPTION_EMAIL = "//body/div[@id='allrecords']/div[@id='rec562643444']/div[1]/div[1]/div[4]/div[1]/form[1]/div[2]/div[2]/div[1]/input[1]";
+    private static final String SUBSCRIPTION_PHONE = "//body/div[@id='allrecords']/div[@id='rec562643444']/div[1]/div[1]/div[4]/div[1]/form[1]/div[2]/div[3]/div[1]/div[1]/input[2]";
+    private static final String SEND_BUTTON = "//body/div[@id='allrecords']/div[@id='rec562643444']/div[1]/div[1]/div[4]/div[1]/form[1]/div[2]/div[6]/button[1]";
+    private static final String SUBSCRIPTION_ERROR_MESSAGE = "//p[contains(text(),'Please fill out all required fields')]";
+    private static final String TESTING_COURSE = ".tn-elem__5625611781679405234205 > .tn-atom";
+    private  static final String TICKET_COURSES = "//*[@id=\"rec570093611\"]/div/div/div[4]/h1/span";
+
+    public void subscription_field() {
+        driver.findElement(By.xpath(SUBSCRIPTION_NAME_FIELD)).sendKeys("Abra Kadabra");
+        driver.findElement(By.xpath(SUBSCRIPTION_EMAIL)).sendKeys("abra@kadabra.au");
+        driver.findElement(By.xpath(SUBSCRIPTION_PHONE)).sendKeys("9999999999");
+        driver.findElement(By.xpath(SEND_BUTTON)).click();
+    }
+
+    public String subscription_error_message() {
+        return
+                driver.findElement(By.xpath(SUBSCRIPTION_ERROR_MESSAGE)).getText();
+    }
+    public void Course_Testing() {
+        driver.findElement(By.cssSelector(TESTING_COURSE)).click();
+    }
+
+    public void SendName() {
+        driver.findElement(By.id("input_1495810359387")).click();
+        driver.findElement(By.id("input_1495810359387")).sendKeys("Abra Kadabra");
 
     }
+
+    public void SendEmail() {
+        driver.findElement(By.id("input_1495810354468")).click();
+        driver.findElement(By.id("input_1495810354468")).sendKeys("abra@kadabra.au");
+    }
+    public void SendNumber(){
+        driver.findElement(By.name("tildaspec-phone-part[]")).click();
+        driver.findElement(By.name("tildaspec-phone-part[]")).sendKeys("(999) 999-99-99");
+    }
+    public void ClickSubmit(){
+        driver.findElement(By.className("t-submit")).click();
+    }
+
+}
+
+
+
 
 
